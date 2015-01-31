@@ -13,14 +13,9 @@ function wppb_description_handler( $output, $form_location, $field, $user_id, $f
 	$input_value = ( isset( $request_data['description'] ) ? trim( $request_data['description'] ) : $input_value );
 	
 	if ( $form_location != 'back_end' ){
-		$error_mark = ( ( $field['required'] == 'Yes' ) ? '<span class="wppb-required" title="'.wppb_required_field_error($field["field-title"]).'">*</span>' : '' );
-					
-		if ( array_key_exists( $field['id'], $field_check_errors ) )
-			$error_mark = '<img src="'.WPPB_PLUGIN_URL.'assets/images/pencil_delete.png" title="'.wppb_required_field_error($field["field-title"]).'"/>';
+		$required_mark = ( ( $field['required'] == 'Yes' ) ? '*' : '' );
 
-        $output = '
-			<label for="description">'.$item_title.$error_mark.'</label>
-			<textarea rows="'.$field['row-count'].'" name="description" maxlength="'. apply_filters( 'wppb_maximum_character_length', '', $field ) .'" class="default_field_description" id="description" wrap="virtual">'. esc_textarea( wp_unslash( $input_value ) ).'</textarea>';
+        $output = '<textarea rows="'.$field['row-count'].'" name="description" maxlength="'. apply_filters( 'wppb_maximum_character_length', '', $field ) .'" class="default_field_description" id="description" wrap="virtual"  placeholder="'. esc_attr( strtoupper($item_title). $required_mark ) .'">'. esc_textarea( wp_unslash( $input_value ) ).'</textarea>';
         if( !empty( $item_description ) )
             $output .= '<span class="wppb-description-delimiter">'. $item_description .'</span>';
 

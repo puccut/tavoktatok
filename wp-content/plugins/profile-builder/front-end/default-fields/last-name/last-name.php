@@ -13,14 +13,10 @@ function wppb_last_name_handler( $output, $form_location, $field, $user_id, $fie
 	$input_value = ( isset( $request_data['last_name'] ) ? trim( $request_data['last_name'] ) : $input_value );
 	
 	if ( $form_location != 'back_end' ){
-		$error_mark = ( ( $field['required'] == 'Yes' ) ? '<span class="wppb-required" title="'.wppb_required_field_error($field["field-title"]).'">*</span>' : '' );
-					
-		if ( array_key_exists( $field['id'], $field_check_errors ) )
-			$error_mark = '<img src="'.WPPB_PLUGIN_URL.'assets/images/pencil_delete.png" title="'.wppb_required_field_error($field["field-title"]).'"/>';
+		$required_mark = ( ( $field['required'] == 'Yes' ) ? '*' : '' );
 
-        $output = '
-			<label for="last_name">'.$item_title.$error_mark.'</label>
-			<input class="text-input default_field_lastname" name="last_name" maxlength="'. apply_filters( 'wppb_maximum_character_length', 70 ) .'" type="text" id="last_name" value="'. esc_attr( wp_unslash( $input_value ) ) .'" />';
+        $output =
+			'<input class="text-input default_field_lastname" name="last_name" maxlength="'. apply_filters( 'wppb_maximum_character_length', 70 ) .'" type="text" id="last_name" value="'. esc_attr( wp_unslash( $input_value ) ) .'"  placeholder="'. esc_attr( strtoupper($item_title). $required_mark ) .'" />';
             if( !empty( $item_description ) )
                 $output .= '<span class="wppb-description-delimiter">'. $item_description .'</span>';
 	}

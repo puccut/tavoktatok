@@ -5,14 +5,10 @@ function wppb_password_repeat_handler( $output, $form_location, $field, $user_id
 	$item_description = wppb_icl_t( 'plugin profile-builder-pro', 'default_field_'.$field['id'].'_description_translation', $field['description'] );
 	
 	if ( $form_location != 'back_end' ){
-		$error_mark = ( ( $field['required'] == 'Yes' ) ? '<span class="wppb-required" title="'.wppb_required_field_error($field["field-title"]).'">*</span>' : '' );
-					
-		if ( array_key_exists( $field['id'], $field_check_errors ) )
-			$error_mark = '<img src="'.WPPB_PLUGIN_URL.'assets/images/pencil_delete.png" title="'.wppb_required_field_error($field["field-title"]).'"/>';
+		$required_mark = ( ( $field['required'] == 'Yes' ) ? '*' : '' );
 
-        $output = '
-			<label for="passw2">' . $item_title.$error_mark . '</label>
-			<input class="text-input" name="passw2" maxlength="'. apply_filters( 'wppb_maximum_character_length', 70 ) .'" type="password" id="passw2" value="" autocomplete="off" />';
+        $output =
+			'<input class="text-input" name="passw2" maxlength="'. apply_filters( 'wppb_maximum_character_length', 70 ) .'" type="password" id="passw2" value="" autocomplete="off" placeholder="'. esc_attr( strtoupper($item_title). $required_mark ) .'" />';
         if( !empty( $item_description ) )
             $output .= '<span class="wppb-description-delimiter">'.$item_description.'</span>';
 	}

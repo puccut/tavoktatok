@@ -38,7 +38,7 @@ function wppb_display_name_handler( $output, $form_location, $field, $user_id, $
 
 
         $output = '<label for="display_name">'.$item_title.$error_mark.'</label>';
-        $output .= '<select class="default_field_display-name" name="display_name" id="display-name">';
+        $output .= '<select class="default_field_display-name" name="display_name" id="display-name" placeholder="'. $item_title .'">';
 
             foreach( $public_display as $display_name_option ) {
                 $output .= '<option ' . selected( $user_data->display_name, $display_name_option, false ) . '>' . $display_name_option . '</option>';
